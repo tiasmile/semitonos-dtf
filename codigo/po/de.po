@@ -1,0 +1,345 @@
+# German translation of Semitonos DTF.
+# Copyright (C) 2026 Tiasmile
+# This file is distributed under the same license as the semitonos-dtf package (AGPL-3.0-or-later).
+# Translated by Claude (AI-assisted). NOT yet reviewed by a native speaker: corrections are welcome (see TRADUCIR.md).
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: semitonos-dtf 1.0.0\n"
+"Report-Msgid-Bugs-To: contacto@tiasmile.com\n"
+"POT-Creation-Date: 2026-10-27 18:42+0100\n"
+"PO-Revision-Date: 2026-10-27 18:43+0100\n"
+"Last-Translator: Claude (AI-assisted, pending native review)\n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: semitonos.py:28
+msgid "Semitonos para DTF"
+msgstr "Halbtöne für DTF"
+
+#: semitonos.py:32
+msgid "Blanca"
+msgstr "Weiß"
+
+#: semitonos.py:32
+msgid "Gris"
+msgstr "Grau"
+
+#: semitonos.py:32
+msgid "Negra"
+msgstr "Schwarz"
+
+#: semitonos.py:33
+msgid "Azul marino"
+msgstr "Marineblau"
+
+#: semitonos.py:33
+msgid "Roja"
+msgstr "Rot"
+
+#: semitonos.py:33
+msgid "Verde botella"
+msgstr "Flaschengrün"
+
+#: semitonos.py:34
+msgid "Comparar"
+msgstr "Vergleichen"
+
+#: semitonos.py:34 semitonos.py:895
+msgid "Original"
+msgstr "Original"
+
+#: semitonos.py:34 semitonos.py:896
+msgid "Resultado"
+msgstr "Ergebnis"
+
+#: semitonos.py:35
+msgid "Ajustar"
+msgstr "Einpassen"
+
+#: semitonos.py:36
+msgid "Blanco"
+msgstr "Weiß"
+
+#: semitonos.py:36
+msgid "Color elegido"
+msgstr "Gewählte Farbe"
+
+#: semitonos.py:36
+msgid "Negro"
+msgstr "Schwarz"
+
+#: semitonos.py:38
+msgid "Barra: arrastrar para comparar · rueda: acercar o alejar · botón derecho: mover la imagen · doble clic: ver entera"
+msgstr "Balken: ziehen zum Vergleichen · Mausrad: vergrößern oder verkleinern · rechte Maustaste: Bild verschieben · Doppelklick: ganzes Bild anzeigen"
+
+#: semitonos.py:243
+msgid "☀  Modo claro"
+msgstr "☀  Heller Modus"
+
+#: semitonos.py:243
+msgid "☾  Modo oscuro"
+msgstr "☾  Dunkler Modus"
+
+#: semitonos.py:290
+msgid "1. Imagen"
+msgstr "1. Bild"
+
+#: semitonos.py:298
+msgid "Abrir imagen…"
+msgstr "Bild öffnen…"
+
+#: semitonos.py:328
+msgid "Fondo de la vista:"
+msgstr "Hintergrund der Vorschau:"
+
+#: semitonos.py:335
+msgid "Solo cambia lo que ves: el PNG que se guarda no lleva fondo."
+msgstr "Ändert nur die Anzeige: Das gespeicherte PNG hat keinen Hintergrund."
+
+#: semitonos.py:336
+msgid "El color de la camiseta elegido abajo"
+msgstr "Die unten gewählte Shirt-Farbe"
+
+#: semitonos.py:422
+msgid "2. Tamaño de impresión"
+msgstr "2. Druckgröße"
+
+#: semitonos.py:424 semitonos.py:488
+msgid "Ancho"
+msgstr "Breite"
+
+#: semitonos.py:428
+msgid "Alto"
+msgstr "Höhe"
+
+#. TRADUCTORES: en «Ancho 25 cm  Alto 20 cm  a 300 ppp», la palabra «a» introduce la resolución
+#: semitonos.py:436
+msgctxt "tamaño de impresión: «25 cm a 300 ppp»"
+msgid "a"
+msgstr "bei"
+
+#. TRADUCTORES: unidad de resolución de impresión (puntos por pulgada), «dpi» en inglés
+#: semitonos.py:439
+msgid "ppp"
+msgstr "dpi"
+
+#: semitonos.py:444
+msgid "3. Color de la camiseta"
+msgstr "3. Shirt-Farbe"
+
+#: semitonos.py:459
+msgid "Otro…"
+msgstr "Andere…"
+
+#. TRADUCTORES: herramienta para coger un color pulsando sobre la imagen (eyedropper / pipette)
+#: semitonos.py:463
+msgid "Cuentagotas"
+msgstr "Pipette"
+
+#: semitonos.py:471
+msgid "Quitar el color de la camiseta de la imagen"
+msgstr "Shirt-Farbe aus dem Bild entfernen"
+
+#. TRADUCTORES: umbral. Los colores más parecidos al de la camiseta que este valor se vuelven transparentes
+#: semitonos.py:473
+msgid "Quitar hasta"
+msgstr "Entfernen bis"
+
+#. TRADUCTORES: umbral. Los colores más distintos al de la camiseta que este valor quedan totalmente opacos
+#: semitonos.py:475
+msgid "Opaco desde"
+msgstr "Deckend ab"
+
+#: semitonos.py:476
+msgid "Más parecido que «Quitar hasta»: desaparece. Más distinto que «Opaco desde»: sólido. Lo de en medio: puntos."
+msgstr "Näher an der Shirt-Farbe als „Entfernen bis“: verschwindet. Weiter davon entfernt als „Deckend ab“: voll deckend. Dazwischen: Punkte."
+
+#: semitonos.py:480
+msgid "4. Degradado del borde"
+msgstr "4. Kantenverlauf"
+
+#: semitonos.py:493
+msgid "Del 100 % al 0 % con puntos. Hacia dentro difumina el borde; hacia fuera añade un margen alargando los colores. Ovalado / Redondo: en elipse o círculo, sin esquinas."
+msgstr "Von 100 % auf 0 % mit Punkten. „Nach innen“ weicht die Kante auf; „Nach außen“ fügt einen Rand hinzu, indem die Farben verlängert werden. Oval / Rund: als Ellipse oder Kreis, ohne Ecken."
+
+#: semitonos.py:498
+msgid "5. Semitono"
+msgstr "5. Halbton"
+
+#: semitonos.py:499
+msgid "Convertir la transparencia en puntos"
+msgstr "Transparenz in Punkte umwandeln"
+
+#. TRADUCTORES: lineatura de la trama (líneas por pulgada, lpi): cuántas filas de puntos caben en una pulgada
+#: semitonos.py:502
+msgid "Lineatura"
+msgstr "Rasterweite"
+
+#: semitonos.py:506
+msgid "Ángulo"
+msgstr "Winkel"
+
+#: semitonos.py:512
+msgid "Forma del punto"
+msgstr "Punktform"
+
+#. TRADUCTORES: tamaño del punto de la trama (en %); por debajo del mínimo el punto se elimina
+#: semitonos.py:517
+msgid "Punto mínimo"
+msgstr "Kleinster Punkt"
+
+#: semitonos.py:518
+msgid "Punto máximo"
+msgstr "Größter Punkt"
+
+#. TRADUCTORES: «no agarran» = los puntos demasiado pequeños no se adhieren a la tela al estampar. «Sólido» = totalmente relleno
+#: semitonos.py:520
+msgid "Lineatura más baja = puntos más grandes. Los puntos más pequeños que el mínimo se quitan (no agarran); por encima del máximo, sólido."
+msgstr "Niedrigere Rasterweite = größere Punkte. Punkte, die kleiner als das Minimum sind, werden entfernt (sie haften nicht); über dem Maximum: voll deckend."
+
+#: semitonos.py:525
+msgid "Guardar PNG para DTF"
+msgstr "PNG für DTF speichern"
+
+#: semitonos.py:534
+msgid "Abrir carpeta"
+msgstr "Ordner öffnen"
+
+#: semitonos.py:644
+msgid "↓   Arrastra aquí la imagen (PNG, JPG, TIFF, WEBP)"
+msgstr "↓   Bild hierher ziehen (PNG, JPG, TIFF, WEBP)"
+
+#: semitonos.py:658
+msgid "Arrastra una imagen PNG, JPG, TIFF o WEBP."
+msgstr "Ein PNG-, JPG-, TIFF- oder WEBP-Bild hierher ziehen."
+
+#: semitonos.py:658
+msgid "Formato no admitido"
+msgstr "Format nicht unterstützt"
+
+#: semitonos.py:662
+msgid "Elegir imagen"
+msgstr "Bild auswählen"
+
+#: semitonos.py:663
+msgid "Imágenes"
+msgstr "Bilder"
+
+#: semitonos.py:663
+msgid "Todos"
+msgstr "Alle"
+
+#: semitonos.py:673
+msgid "No se puede abrir"
+msgstr "Öffnen nicht möglich"
+
+#: semitonos.py:673
+#, python-brace-format
+msgid ""
+"No se puede abrir la imagen:\n"
+"{error}"
+msgstr ""
+"Das Bild kann nicht geöffnet werden:\n"
+"{error}"
+
+#: semitonos.py:702 semitonos.py:863
+msgid "Calculando…"
+msgstr "Wird berechnet…"
+
+#: semitonos.py:739
+msgid "No hay memoria suficiente para este tamaño. Baja el ancho o la resolución."
+msgstr "Nicht genug Speicher für diese Größe. Breite oder Auflösung verringern."
+
+#: semitonos.py:764
+#, python-brace-format
+msgid "✔ Guardado: {nombre}"
+msgstr "✔ Gespeichert: {nombre}"
+
+#: semitonos.py:774
+msgid "No se ha podido guardar"
+msgstr "Speichern nicht möglich"
+
+#: semitonos.py:863
+msgid "Arrastra aquí una imagen para empezar"
+msgstr "Zum Starten ein Bild hierher ziehen"
+
+#: semitonos.py:897
+msgid "(ajustado)"
+msgstr "(angepasst)"
+
+#: semitonos.py:899
+msgid "Haz clic en el color de la camiseta (Esc para cancelar)"
+msgstr "Auf die Shirt-Farbe klicken (Esc zum Abbrechen)"
+
+#: semitonos.py:969
+msgid "Color de la camiseta"
+msgstr "Shirt-Farbe"
+
+#: semitonos.py:1018
+#, python-brace-format
+msgid "Impresión: {ancho} × {alto} cm a {ppp} ppp ({w} × {h} px)"
+msgstr "Druck: {ancho} × {alto} cm bei {ppp} dpi ({w} × {h} px)"
+
+#: semitonos.py:1021
+#, python-brace-format
+msgid "trama de {mm} mm"
+msgstr "Rasterabstand {mm} mm"
+
+#: semitonos.py:1025
+#, python-brace-format
+msgid "⚠ Poca resolución: la imagen original da {ppp} ppp a este tamaño. Se verá borrosa (mejor no pasar de {cm} cm)."
+msgstr "⚠ Geringe Auflösung: Das Originalbild ergibt bei dieser Größe nur {ppp} dpi. Es wirkt unscharf (besser nicht über {cm} cm gehen)."
+
+#: semitonos.py:1046 semitonos.py:1047
+msgid "Guardando…"
+msgstr "Wird gespeichert…"
+
+#: tramado.py:23
+msgid "Cuadrado"
+msgstr "Quadratisch"
+
+#: tramado.py:23
+msgid "Euclídeo"
+msgstr "Euklidisch"
+
+#: tramado.py:23
+msgid "Líneas"
+msgstr "Linien"
+
+#: tramado.py:23 tramado.py:25
+msgid "Redondo"
+msgstr "Rund"
+
+#: tramado.py:24
+msgid "Hacia dentro"
+msgstr "Nach innen"
+
+#: tramado.py:24
+msgid "Hacia fuera"
+msgstr "Nach außen"
+
+#: tramado.py:24
+msgid "Sin degradado"
+msgstr "Kein Verlauf"
+
+#: tramado.py:25
+msgid "Ovalado"
+msgstr "Oval"
+
+#: tramado.py:25
+msgid "Sigue el diseño"
+msgstr "Folgt dem Motiv"
+
+#: tramado.py:92
+#, python-brace-format
+msgid "Demasiado grande: {w} × {h} px (máximo {maximo} px por lado). Baja el ancho o la resolución."
+msgstr "Zu groß: {w} × {h} px (maximal {maximo} px pro Seite). Breite oder Auflösung verringern."
+
+#: tramado.py:244 tramado.py:257
+msgid "Con el degradado hacia fuera la imagen pasa del tamaño máximo."
+msgstr "Beim Verlauf nach außen überschreitet das Bild die maximale Größe."

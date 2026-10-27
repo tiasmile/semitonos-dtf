@@ -21,18 +21,22 @@ from PySide6.QtWidgets import (QApplication, QButtonGroup, QCheckBox, QColorDial
                                QRadioButton, QScrollArea, QSlider, QVBoxLayout, QWidget)
 
 import estilo
+import idioma
 import tramado as T
+from idioma import N_, tr, trc
 
-APP_NOMBRE = "Semitonos para DTF"
+APP_NOMBRE = tr("Semitonos para DTF")
 ARCHIVO_AJUSTES = "ajustes.json"
-CAMISETAS = [("Blanca", "#ffffff"), ("Negra", "#000000"), ("Gris", "#9a9a9a"),
-             ("Azul marino", "#1c2541"), ("Roja", "#b3141f"), ("Verde botella", "#1d4d34")]
-VISTAS = ["Comparar", "Resultado", "Original"]
-ZOOMS = ["Ajustar", "100 %", "200 %"]
-FONDOS = ["Blanco", "Negro", "Color elegido"]      # fondo de la vista previa; «Color elegido» = el de la camiseta
+# Los textos de estas listas son CLAVES (se guardan en ajustes.json y el código las compara): siguen en castellano en
+# cualquier idioma. N_() solo las marca para extraerlas; se traducen al mostrarlas, con tr().
+CAMISETAS = [(N_("Blanca"), "#ffffff"), (N_("Negra"), "#000000"), (N_("Gris"), "#9a9a9a"),
+             (N_("Azul marino"), "#1c2541"), (N_("Roja"), "#b3141f"), (N_("Verde botella"), "#1d4d34")]
+VISTAS = [N_("Comparar"), N_("Resultado"), N_("Original")]
+ZOOMS = [N_("Ajustar"), "100 %", "200 %"]
+FONDOS = [N_("Blanco"), N_("Negro"), N_("Color elegido")]   # fondo de la vista previa; «Color elegido» = el de la camiseta
 AJUSTES_POR_DEFECTO = {"interfaz": "claro", "ultima_carpeta": "", "fondo_vista": "Color elegido", "opciones": asdict(T.Opciones())}
-AYUDA_VISTA = ("Barra: arrastrar para comparar · rueda: acercar o alejar · botón derecho: mover la imagen · "
-               "doble clic: ver entera")
+AYUDA_VISTA = tr("Barra: arrastrar para comparar · rueda: acercar o alejar · botón derecho: mover la imagen · "
+                 "doble clic: ver entera")
 MARCA = "#ffc72c"        # barra de comparar (aviso visual, sobre cualquier color de camiseta)
 
 
@@ -74,8 +78,10 @@ def guardar_ajustes(datos):
 
 
 def numero(x, dec=1):
-    texto = f"{x:.{dec}f}".replace(".", ",")
-    return texto.rstrip("0").rstrip(",") if "," in texto else texto
+    texto = f"{x:.{dec}f}"
+    if "." in texto:
+        texto = texto.rstrip("0").rstrip(".")
+    return texto.replace(".", idioma.DECIMAL)
 
 
 def leer_num(texto, defecto):
@@ -230,11 +236,11 @@ class Semitonos(QMainWindow):
         col.setContentsMargins(18, 14, 18, 16)
         col.setSpacing(0)
         cab = QHBoxLayout()
-        titulo = QLabel("Semitonos para DTF")
+        titulo = QLabel(APP_NOMBRE)
         titulo.setObjectName("cabecera")
         cab.addWidget(titulo)
         cab.addStretch()
-        b = QPushButton("☀  Modo claro" if self.tema == "oscuro" else "☾  Modo oscuro")
+        b = QPushButton(tr("☀  Modo claro") if self.tema == "oscuro" else tr("☾  Modo oscuro"))
         b.clicked.connect(self._cambiar_tema)
         cab.addWidget(b)
         col.addLayout(cab)
@@ -281,7 +287,7 @@ class Semitonos(QMainWindow):
     # ----- izquierda: imagen y vista previa ---------------------------------
     def _panel_vista(self):
         izq = QVBoxLayout()
-        izq.addWidget(self._titulo("1. Imagen"))
+        izq.addWidget(self._titulo(tr("1. Imagen")))
         zona = QFrame()
         zona.setObjectName("zona")
         h = QHBoxLayout(zona)
@@ -289,7 +295,7 @@ class Semitonos(QMainWindow):
         self.l_archivo = QLabel(self._texto_archivo())
         self.l_archivo.setStyleSheet("font-weight: 600;")
         h.addWidget(self.l_archivo, 1)
-        b = QPushButton("Abrir imagen…")
+        b = QPushButton(tr("Abrir imagen…"))
         b.clicked.connect(self._elegir)
         h.addWidget(b)
         izq.addWidget(zona)
@@ -298,7 +304,7 @@ class Semitonos(QMainWindow):
         barra = QHBoxLayout()
         grupo_v, grupo_z = QButtonGroup(self), QButtonGroup(self)
         for valor in VISTAS:
-            r = QRadioButton(valor)
+            r = QRadioButton(tr(valor))
             r.setChecked(valor == self.vista)
             r.toggled.connect(lambda on, val=valor: on and self._cambiar_vista(val))
             grupo_v.addButton(r)
@@ -306,7 +312,7 @@ class Semitonos(QMainWindow):
         barra.addSpacing(14)
         self.radios_zoom = {}
         for valor in ZOOMS:
-            r = QRadioButton(valor)
+            r = QRadioButton(tr(valor))
             r.setChecked(valor == self.zoom_txt)
             r.toggled.connect(lambda on, val=valor: on and self._cambiar_zoom(val))
             grupo_z.addButton(r)
@@ -319,15 +325,15 @@ class Semitonos(QMainWindow):
         izq.addLayout(barra)
 
         barra2 = QHBoxLayout()
-        barra2.addWidget(self._ayuda("Fondo de la vista:"))
+        barra2.addWidget(self._ayuda(tr("Fondo de la vista:")))
         grupo_f = QButtonGroup(self)
         self.radios_fondo = {}
         for valor in FONDOS:
-            r = QRadioButton(valor)
+            r = QRadioButton(tr(valor))
             self.radios_fondo[valor] = r
             r.setChecked(valor == self.fondo_vista)
-            r.setToolTip("Solo cambia lo que ves: el PNG que se guarda no lleva fondo." if valor != FONDOS[-1] else
-                         "El color de la camiseta elegido abajo")
+            r.setToolTip(tr("Solo cambia lo que ves: el PNG que se guarda no lleva fondo.") if valor != FONDOS[-1] else
+                         tr("El color de la camiseta elegido abajo"))
             r.toggled.connect(lambda on, val=valor: on and self._cambiar_fondo(val))
             grupo_f.addButton(r)
             barra2.addWidget(r)
@@ -372,10 +378,12 @@ class Semitonos(QMainWindow):
 
     def _lista(self, nombre, valores, ancho=130):
         w = QComboBox()
-        w.addItems(valores)
-        w.setCurrentText(self.v[nombre])
-        w.setFixedWidth(ancho)
-        w.currentTextChanged.connect(lambda txt, k=nombre: self._cambio(k, txt))
+        for valor in valores:        # se ve traducido; lo que se guarda y se compara es la clave en castellano
+            w.addItem(tr(valor), valor)
+        w.setCurrentIndex(max(0, w.findData(self.v[nombre])))
+        fm = w.fontMetrics()           # el ancho se ajusta al texto más largo de la lista (cambia según el idioma)
+        w.setFixedWidth(max(ancho, max(fm.horizontalAdvance(w.itemText(i)) for i in range(w.count())) + 40))
+        w.currentIndexChanged.connect(lambda _i, k=nombre, c=w: self._cambio(k, c.currentData()))
         self.w[nombre] = w
         return w
 
@@ -412,23 +420,29 @@ class Semitonos(QMainWindow):
         self.w = {}
 
         # --- Tamaño
-        g = self._tarjeta(der, "2. Tamaño de impresión")
+        g = self._tarjeta(der, tr("2. Tamaño de impresión"))
         caja = QHBoxLayout()
-        caja.addWidget(QLabel("Ancho"))
+        caja.addWidget(QLabel(tr("Ancho")))
         caja.addWidget(self._campo("ancho_cm", 64))
-        caja.addWidget(QLabel("cm   Alto"))
+        caja.addWidget(QLabel("cm"))
+        caja.addSpacing(10)
+        caja.addWidget(QLabel(tr("Alto")))
         self.e_alto = QLineEdit(self.v_alto)
         self.e_alto.setFixedWidth(64)
         self.e_alto.textChanged.connect(lambda txt: self._sincronizar("alto", txt))
         caja.addWidget(self.e_alto)
-        caja.addWidget(QLabel("cm   a"))
+        caja.addWidget(QLabel("cm"))
+        caja.addSpacing(10)
+        # TRADUCTORES: en «Ancho 25 cm  Alto 20 cm  a 300 ppp», la palabra «a» introduce la resolución
+        caja.addWidget(QLabel(trc("tamaño de impresión: «25 cm a 300 ppp»", "a")))
         caja.addWidget(self._campo("ppp", 52, ["300", "360", "400"]))
-        caja.addWidget(QLabel("ppp"))
+        # TRADUCTORES: unidad de resolución de impresión (puntos por pulgada), «dpi» en inglés
+        caja.addWidget(QLabel(tr("ppp")))
         caja.addStretch()
         g.addLayout(caja, 0, 0, 1, 2)
 
         # --- Camiseta
-        g = self._tarjeta(der, "3. Color de la camiseta")
+        g = self._tarjeta(der, tr("3. Color de la camiseta"))
         caja = QHBoxLayout()
         self.l_color = QFrame()
         self.l_color.setFixedSize(46, 30)
@@ -439,14 +453,15 @@ class Semitonos(QMainWindow):
             m.setObjectName("muestra")
             m.setFixedSize(24, 24)
             m.setCursor(Qt.PointingHandCursor)
-            m.setToolTip(nombre)
+            m.setToolTip(tr(nombre))
             m.setStyleSheet(f"background: {color};")
             m.clicked.connect(lambda _=False, c=color: self._cambio("camiseta", c, actualizar=True))
             caja.addWidget(m)
-        otro = QPushButton("Otro…")
+        otro = QPushButton(tr("Otro…"))
         otro.setObjectName("chico")
         otro.clicked.connect(self._otro_color)
-        self.b_gotas = QPushButton("Cuentagotas")
+        # TRADUCTORES: herramienta para coger un color pulsando sobre la imagen (eyedropper / pipette)
+        self.b_gotas = QPushButton(tr("Cuentagotas"))
         self.b_gotas.setObjectName("chico")
         self.b_gotas.clicked.connect(self._activar_cuentagotas)
         caja.addSpacing(6)
@@ -454,53 +469,61 @@ class Semitonos(QMainWindow):
         caja.addWidget(self.b_gotas)
         caja.addStretch()
         g.addLayout(caja, 0, 0, 1, 2)
-        g.addWidget(self._casilla("quitar", "Quitar el color de la camiseta de la imagen"), 1, 0, 1, 2)
-        self.s_tol = self._deslizador(g, 2, "Quitar hasta", "tolerancia", 0, 50)
-        self.s_opaco = self._deslizador(g, 3, "Opaco desde", "opaco", 10, 100)
-        g.addWidget(self._ayuda("Más parecido que «Quitar hasta»: desaparece. Más distinto que «Opaco desde»: "
-                                "sólido. Lo de en medio: puntos."), 4, 0, 1, 2)
+        g.addWidget(self._casilla("quitar", tr("Quitar el color de la camiseta de la imagen")), 1, 0, 1, 2)
+        # TRADUCTORES: umbral. Los colores más parecidos al de la camiseta que este valor se vuelven transparentes
+        self.s_tol = self._deslizador(g, 2, tr("Quitar hasta"), "tolerancia", 0, 50)
+        # TRADUCTORES: umbral. Los colores más distintos al de la camiseta que este valor quedan totalmente opacos
+        self.s_opaco = self._deslizador(g, 3, tr("Opaco desde"), "opaco", 10, 100)
+        g.addWidget(self._ayuda(tr("Más parecido que «Quitar hasta»: desaparece. Más distinto que «Opaco desde»: "
+                                   "sólido. Lo de en medio: puntos.")), 4, 0, 1, 2)
 
         # --- Degradado
-        g = self._tarjeta(der, "4. Degradado del borde")
+        g = self._tarjeta(der, tr("4. Degradado del borde"))
         caja = QHBoxLayout()
+        # TRADUCTORES: tipo de degradado del borde del diseño: sin degradado / hacia dentro / hacia fuera
         caja.addWidget(self._lista("borde", T.BORDES, 130))
         caja.addWidget(self._lista("forma_borde", T.FORMAS_BORDE, 130))
         caja.addStretch()
         g.addLayout(caja, 0, 0, 1, 2)
         caja = QHBoxLayout()
-        caja.addWidget(QLabel("Ancho"))
+        caja.addWidget(QLabel(tr("Ancho")))
         caja.addWidget(self._campo("borde_mm", 60))
         caja.addWidget(QLabel("mm"))
         caja.addStretch()
         g.addLayout(caja, 1, 0, 1, 2)
-        g.addWidget(self._ayuda("Del 100 % al 0 % con puntos. Hacia dentro difumina el borde; hacia fuera añade un "
-                                "margen alargando los colores. Ovalado / Redondo: en elipse o círculo, sin esquinas."),
+        g.addWidget(self._ayuda(tr("Del 100 % al 0 % con puntos. Hacia dentro difumina el borde; hacia fuera añade un "
+                                   "margen alargando los colores. Ovalado / Redondo: en elipse o círculo, sin esquinas.")),
                     2, 0, 1, 2)
 
         # --- Semitono
-        g = self._tarjeta(der, "5. Semitono")
-        g.addWidget(self._casilla("semitono", "Convertir la transparencia en puntos"), 0, 0, 1, 2)
+        g = self._tarjeta(der, tr("5. Semitono"))
+        g.addWidget(self._casilla("semitono", tr("Convertir la transparencia en puntos")), 0, 0, 1, 2)
         caja = QHBoxLayout()
-        caja.addWidget(QLabel("Lineatura"))
+        # TRADUCTORES: lineatura de la trama (líneas por pulgada, lpi): cuántas filas de puntos caben en una pulgada
+        caja.addWidget(QLabel(tr("Lineatura")))
         caja.addWidget(self._campo("lpi", 46, ["10", "15", "20", "25", "35", "45", "55"]))
-        caja.addWidget(QLabel("lpi   Ángulo"))
-        caja.addWidget(self._campo("angulo", 52, ["0", "15", "22,5", "45", "75"]))
+        caja.addWidget(QLabel("lpi"))
+        caja.addSpacing(10)
+        caja.addWidget(QLabel(tr("Ángulo")))
+        caja.addWidget(self._campo("angulo", 52, ["0", "15", numero(22.5), "45", "75"]))
         caja.addWidget(QLabel("°"))
         caja.addStretch()
         g.addLayout(caja, 1, 0, 1, 2)
         caja = QHBoxLayout()
-        caja.addWidget(QLabel("Forma del punto"))
+        caja.addWidget(QLabel(tr("Forma del punto")))
         caja.addWidget(self._lista("forma", T.FORMAS, 120))
         caja.addStretch()
         g.addLayout(caja, 2, 0, 1, 2)
-        self.s_min = self._deslizador(g, 3, "Punto mínimo", "punto_min", 0, 40)
-        self.s_max = self._deslizador(g, 4, "Punto máximo", "punto_max", 60, 100)
-        g.addWidget(self._ayuda("Lineatura más baja = puntos más grandes. Los puntos más pequeños que el mínimo se "
-                                "quitan (no agarran); por encima del máximo, sólido."), 5, 0, 1, 2)
+        # TRADUCTORES: tamaño del punto de la trama (en %); por debajo del mínimo el punto se elimina
+        self.s_min = self._deslizador(g, 3, tr("Punto mínimo"), "punto_min", 0, 40)
+        self.s_max = self._deslizador(g, 4, tr("Punto máximo"), "punto_max", 60, 100)
+        # TRADUCTORES: «no agarran» = los puntos demasiado pequeños no se adhieren a la tela al estampar. «Sólido» = totalmente relleno
+        g.addWidget(self._ayuda(tr("Lineatura más baja = puntos más grandes. Los puntos más pequeños que el mínimo se "
+                                   "quitan (no agarran); por encima del máximo, sólido.")), 5, 0, 1, 2)
 
         # --- Guardar
         der.addSpacing(6)
-        self.b_guardar = QPushButton("Guardar PNG para DTF")
+        self.b_guardar = QPushButton(tr("Guardar PNG para DTF"))
         self.b_guardar.setObjectName("accion")
         self.b_guardar.clicked.connect(self._guardar_png)
         der.addWidget(self.b_guardar)
@@ -509,7 +532,7 @@ class Semitonos(QMainWindow):
         self.l_estado.setObjectName("suave")
         self.l_estado.setWordWrap(True)
         abajo.addWidget(self.l_estado, 1)
-        self.b_abrir = QPushButton("Abrir carpeta")
+        self.b_abrir = QPushButton(tr("Abrir carpeta"))
         self.b_abrir.setObjectName("chico")
         self.b_abrir.clicked.connect(self._abrir_carpeta)
         self.b_abrir.setVisible(bool(self._carpeta_resultado))
@@ -619,7 +642,7 @@ class Semitonos(QMainWindow):
     # ======================================================================
     def _texto_archivo(self):
         if not self.ruta:
-            return "↓   Arrastra aquí la imagen (PNG, JPG, TIFF, WEBP)"
+            return tr("↓   Arrastra aquí la imagen (PNG, JPG, TIFF, WEBP)")
         return f"{os.path.basename(self.ruta)}   ·   {self.im.width} × {self.im.height} px"
 
     def dragEnterEvent(self, e):
@@ -633,12 +656,12 @@ class Semitonos(QMainWindow):
                 e.acceptProposedAction()
                 self._abrir(r)
                 return
-        QMessageBox.information(self, "Formato no admitido", "Arrastra una imagen PNG, JPG, TIFF o WEBP.")
+        QMessageBox.information(self, tr("Formato no admitido"), tr("Arrastra una imagen PNG, JPG, TIFF o WEBP."))
 
     def _elegir(self):
         ruta, _ = QFileDialog.getOpenFileName(
-            self, "Elegir imagen", self.aj.get("ultima_carpeta") or "",
-            "Imágenes (" + " ".join("*" + e for e in sorted(T.EXTENSIONES)) + ");;Todos (*)")
+            self, tr("Elegir imagen"), self.aj.get("ultima_carpeta") or "",
+            tr("Imágenes") + " (" + " ".join("*" + e for e in sorted(T.EXTENSIONES)) + ");;" + tr("Todos") + " (*)")
         if ruta:
             self._abrir(ruta)
 
@@ -648,7 +671,7 @@ class Semitonos(QMainWindow):
             im, ppp = T.abrir(ruta)
         except Exception as e:
             QApplication.restoreOverrideCursor()
-            QMessageBox.critical(self, "No se puede abrir", f"No se puede abrir la imagen:\n{e}")
+            QMessageBox.critical(self, tr("No se puede abrir"), tr("No se puede abrir la imagen:\n{error}").format(error=e))
             return
         QApplication.restoreOverrideCursor()
         self.ruta, self.im, self.ppp_archivo = os.path.normpath(ruta), im, ppp
@@ -677,7 +700,7 @@ class Semitonos(QMainWindow):
         if self.im is None:
             return
         self._gen += 1
-        self.l_calculo.setText("Calculando…")
+        self.l_calculo.setText(tr("Calculando…"))
         with self._cerrojo:
             self._pedido = ("vista", self._gen, self.opciones(), self.im)
             self._arrancar_hilo()
@@ -714,7 +737,7 @@ class Semitonos(QMainWindow):
                 else:
                     self.cola.put(("vista", gen, (op, T.procesar(im, op, escalada[1]))))
             except MemoryError:
-                self.cola.put(("error", gen, "No hay memoria suficiente para este tamaño. Baja el ancho o la resolución."))
+                self.cola.put(("error", gen, tr("No hay memoria suficiente para este tamaño. Baja el ancho o la resolución.")))
             except Exception as e:
                 self.cola.put(("error", gen, str(e)))
 
@@ -739,7 +762,7 @@ class Semitonos(QMainWindow):
                         self.resultado = datos
                     self._carpeta_resultado = os.path.dirname(gen)
                     self.b_abrir.setVisible(True)
-                    self._estado(f"✔ Guardado: {os.path.basename(gen)}")
+                    self._estado(tr("✔ Guardado: {nombre}").format(nombre=os.path.basename(gen)))
                     self.l_calculo.setText("")
                     self._actualizar_controles()
                     if not self.resultado or self.resultado[0] != self.opciones():
@@ -749,7 +772,7 @@ class Semitonos(QMainWindow):
                         self._guardando = False
                         self._actualizar_controles()
                         self._estado("")
-                        QMessageBox.critical(self, "No se ha podido guardar", datos)
+                        QMessageBox.critical(self, tr("No se ha podido guardar"), datos)
                     self._error = datos
                     self.l_calculo.setText("")
                     self._info()
@@ -838,7 +861,7 @@ class Semitonos(QMainWindow):
         fuente.setPixelSize(round(13 * dpr))
         p.setFont(fuente)
         if datos is None or cw < 50 or ch < 50:
-            texto = "Calculando…" if self.im is not None else "Arrastra aquí una imagen para empezar"
+            texto = tr("Calculando…") if self.im is not None else tr("Arrastra aquí una imagen para empezar")
             p.setPen(QColor(contraste(color)))
             p.drawText(QRectF(0, 0, cw, ch), Qt.AlignCenter, texto)
             return
@@ -870,11 +893,11 @@ class Semitonos(QMainWindow):
             p.setBrush(QColor(MARCA))
             p.setPen(Qt.NoPen)
             p.drawRoundedRect(QRectF(bx - 7 * dpr, ch / 2 - 22 * dpr, 14 * dpr, 44 * dpr), 4 * dpr, 4 * dpr)
-            self._etiqueta(p, dpr, 12 * dpr, 10 * dpr, "Original", "nw")
-            self._etiqueta(p, dpr, cw - 12 * dpr, 10 * dpr, "Resultado", "ne")
-        self._etiqueta(p, dpr, 12 * dpr, ch - 10 * dpr, f"{round(z * 100)} %" + ("" if self.zoom else " (ajustado)"), "sw")
+            self._etiqueta(p, dpr, 12 * dpr, 10 * dpr, tr("Original"), "nw")
+            self._etiqueta(p, dpr, cw - 12 * dpr, 10 * dpr, tr("Resultado"), "ne")
+        self._etiqueta(p, dpr, 12 * dpr, ch - 10 * dpr, f"{round(z * 100)} %" + ("" if self.zoom else " " + tr("(ajustado)")), "sw")
         if self.cuentagotas:
-            self._etiqueta(p, dpr, cw / 2, 10 * dpr, "Haz clic en el color de la camiseta (Esc para cancelar)", "n")
+            self._etiqueta(p, dpr, cw / 2, 10 * dpr, tr("Haz clic en el color de la camiseta (Esc para cancelar)"), "n")
 
     def _etiqueta(self, p, dpr, x, y, texto, ancla):
         m = p.fontMetrics()
@@ -944,7 +967,7 @@ class Semitonos(QMainWindow):
 
     # ----- cuentagotas y colores ------------------------------------------
     def _otro_color(self):
-        c = QColorDialog.getColor(QColor(self.opciones().camiseta), self, "Color de la camiseta")
+        c = QColorDialog.getColor(QColor(self.opciones().camiseta), self, tr("Color de la camiseta"))
         if c.isValid():
             self._cambio("camiseta", c.name().lower())
 
@@ -993,14 +1016,16 @@ class Semitonos(QMainWindow):
             rw, rh = self.resultado[1].size
             ancho, alto = rw / op.ppp * 2.54, rh / op.ppp * 2.54
             w, h = rw, rh
-        texto = f"Impresión: {numero(ancho)} × {numero(alto)} cm a {op.ppp} ppp ({w} × {h} px)"
+        texto = tr("Impresión: {ancho} × {alto} cm a {ppp} ppp ({w} × {h} px)").format(
+            ancho=numero(ancho), alto=numero(alto), ppp=op.ppp, w=w, h=h)
         if op.semitono:
-            texto += f"  ·  trama de {numero(25.4 / op.lpi, 2)} mm"
+            texto += "  ·  " + tr("trama de {mm} mm").format(mm=numero(25.4 / op.lpi, 2))
         real = self.im.width / (op.ancho_cm / 2.54)
         estilo_info = ""
         if real < 150:
-            texto += (f"\n⚠ Poca resolución: la imagen original da {round(real)} ppp a este tamaño. "
-                      f"Se verá borrosa (mejor no pasar de {numero(self.im.width / 150 * 2.54)} cm).")
+            texto += "\n" + tr("⚠ Poca resolución: la imagen original da {ppp} ppp a este tamaño. "
+                              "Se verá borrosa (mejor no pasar de {cm} cm).").format(
+                ppp=round(real), cm=numero(self.im.width / 150 * 2.54))
             estilo_info = f"color: {self.t['aviso']};"
         texto += "\n" + AYUDA_VISTA
         self.l_info.setText(texto)
@@ -1019,8 +1044,8 @@ class Semitonos(QMainWindow):
         ruta = T.ruta_libre(os.path.dirname(self.ruta), f"{base} - DTF semitono", ".png")
         self._guardando = True
         self._actualizar_controles()
-        self._estado("Guardando…")
-        self.l_calculo.setText("Guardando…")
+        self._estado(tr("Guardando…"))
+        self.l_calculo.setText(tr("Guardando…"))
         with self._cerrojo:
             # el pedido de guardar lleva la ruta en el lugar del número de vista
             self._pedido_guardar = ("guardar", ruta, op, self.im)
@@ -1033,6 +1058,7 @@ class Semitonos(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
+    idioma.instalar_qt(app)
     app.setApplicationName(APP_NOMBRE)
     app.setDesktopFileName(os.environ.get("FLATPAK_ID", "semitonos-dtf"))
     rutas = [a for a in sys.argv[1:] if os.path.isfile(a)]

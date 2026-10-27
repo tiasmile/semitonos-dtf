@@ -15,11 +15,14 @@ from dataclasses import dataclass
 import numpy as np
 from PIL import Image, ImageOps
 
+from idioma import N_, tr
+
 Image.MAX_IMAGE_PIXELS = None
 
-FORMAS = ["Redondo", "Euclídeo", "Cuadrado", "Líneas"]
-BORDES = ["Sin degradado", "Hacia dentro", "Hacia fuera"]
-FORMAS_BORDE = ["Sigue el diseño", "Ovalado", "Redondo"]
+# Claves en castellano (se guardan en ajustes.json y se comparan más abajo); la interfaz las muestra traducidas.
+FORMAS = [N_("Redondo"), N_("Euclídeo"), N_("Cuadrado"), N_("Líneas")]
+BORDES = [N_("Sin degradado"), N_("Hacia dentro"), N_("Hacia fuera")]
+FORMAS_BORDE = [N_("Sigue el diseño"), N_("Ovalado"), N_("Redondo")]
 EXTENSIONES = {".png", ".jpg", ".jpeg", ".tif", ".tiff", ".webp", ".bmp", ".gif"}
 MAX_LADO = 20000       # píxeles por lado del resultado
 
@@ -86,8 +89,8 @@ def escalar(im, op):
     """Imagen al tamaño de impresión, como matriz float32 (alto, ancho, 4) en 0..1."""
     w, h = medidas_px(im, op)
     if max(w, h) > MAX_LADO:
-        raise ValueError(f"Demasiado grande: {w} × {h} px (máximo {MAX_LADO} px por lado). "
-                         "Baja el ancho o la resolución.")
+        raise ValueError(tr("Demasiado grande: {w} × {h} px (máximo {maximo} px por lado). "
+                            "Baja el ancho o la resolución.").format(w=w, h=h, maximo=MAX_LADO))
     if (w, h) != im.size:
         im = im.resize((w, h), Image.LANCZOS)
     return np.asarray(im, dtype=np.float32) / 255.0
@@ -238,7 +241,7 @@ def degradar_fuera(rgba, px, forma="Sigue el diseño"):
         mx = int(math.ceil(max(0, a + px - cx, a + px - (w - cx)))) + 2
         my = int(math.ceil(max(0, b + px - cy, b + px - (h - cy)))) + 2
         if max(h + 2 * my, w + 2 * mx) > MAX_LADO:
-            raise ValueError("Con el degradado hacia fuera la imagen pasa del tamaño máximo.")
+            raise ValueError(tr("Con el degradado hacia fuera la imagen pasa del tamaño máximo."))
         rgba = np.pad(rgba, ((my, my), (mx, mx), (0, 0)))
         dentro = rgba[..., 3] > 0.5
         exterior = np.maximum(_dist_elipse(rgba.shape[0], rgba.shape[1], cx + mx, cy + my, a + px, b + px), 0)
@@ -251,7 +254,7 @@ def degradar_fuera(rgba, px, forma="Sigue el diseño"):
         return rgba
     m = int(math.ceil(px)) + 2
     if max(rgba.shape[:2]) + 2 * m > MAX_LADO:
-        raise ValueError("Con el degradado hacia fuera la imagen pasa del tamaño máximo.")
+        raise ValueError(tr("Con el degradado hacia fuera la imagen pasa del tamaño máximo."))
     rgba = np.pad(rgba, ((m, m), (m, m), (0, 0)))
     dentro = rgba[..., 3] > 0.5
     d = distancia(~dentro, px, fuera_es_dentro=True)
