@@ -6,3 +6,4 @@ salida/
 .venv/
 flatpak/flathub/paquete/
 flatpak/capturas/__pycache__/
+dist/
