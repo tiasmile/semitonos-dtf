@@ -1,9 +1,23 @@
 [Desktop Entry]
 Type=Application
 Name=Semitonos DTF
-Comment=Prepara imágenes para estampar en DTF con semitonos
+Comment=Prepare images for DTF printing with halftones
+Comment[es]=Prepara imágenes para estampar en DTF con semitonos
+Comment[de]=Bilder für den DTF-Druck mit Halbtönen vorbereiten
+Comment[it]=Prepara immagini per la stampa DTF con i mezzitoni
+Comment[fr]=Préparer des images pour l'impression DTF avec des demi-teintes
+Comment[pt_BR]=Prepare imagens para impressão DTF com meios-tons
+Comment[ca]=Prepara imatges per a la impressió DTF amb semitons
 Exec=semitonos-dtf %f
 Icon=com.tiasmile.SemitonosDTF
 Terminal=false
+StartupNotify=true
 Categories=Graphics;
 MimeType=image/png;image/jpeg;image/webp;image/tiff;
+Keywords=halftone;DTF;print;transparency;shirt;t-shirt;screen;dots;
+Keywords[es]=semitono;DTF;estampar;camiseta;trama;transparencia;puntos;
+Keywords[de]=Halbton;DTF;Druck;Transparenz;Shirt;Raster;Punkte;
+Keywords[it]=mezzitoni;DTF;stampa;trasparenza;maglietta;retino;punti;
+Keywords[fr]=demi-teinte;DTF;impression;transparence;t-shirt;trame;points;
+Keywords[pt_BR]=meio-tom;DTF;impressão;transparência;camiseta;retícula;pontos;
+Keywords[ca]=semitò;DTF;estampar;samarreta;trama;transparència;punts;

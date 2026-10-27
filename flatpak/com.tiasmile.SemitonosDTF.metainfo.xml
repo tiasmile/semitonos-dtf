@@ -2,23 +2,98 @@
 <component type="desktop-application">
   <id>com.tiasmile.SemitonosDTF</id>
   <name>Semitonos DTF</name>
-  <summary>Prepara imágenes para estampar en DTF con semitonos</summary>
+  <summary>Halftones for DTF printing</summary>
+  <summary xml:lang="es">Semitonos para impresión DTF</summary>
+  <summary xml:lang="de">Halbtöne für den DTF-Druck</summary>
+  <summary xml:lang="it">Mezzitoni per la stampa DTF</summary>
+  <summary xml:lang="fr">Demi-teintes pour impression DTF</summary>
+  <summary xml:lang="pt_BR">Meios-tons para impressão DTF</summary>
+  <summary xml:lang="ca">Semitons per a impressió DTF</summary>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>AGPL-3.0-or-later</project_license>
   <developer id="com.tiasmile">
     <name>Tiasmile</name>
   </developer>
   <description>
-    <p>Convierte una imagen con transparencia en un PNG con píxeles totalmente opacos o totalmente transparentes, que es lo que necesita la tinta blanca de la impresión DTF.</p>
-    <p>Incluye vista previa para comparar el original y el resultado sobre distintos colores de camiseta.</p>
+      <p>Turns an image with transparency into a PNG whose pixels are either fully opaque or fully transparent, which is what the white ink of DTF (direct-to-film) printing needs.</p>
+      <p xml:lang="es">Convierte una imagen con transparencia en un PNG cuyos píxeles son totalmente opacos o totalmente transparentes, que es lo que necesita la tinta blanca de la impresión DTF (direct to film).</p>
+      <p xml:lang="de">Wandelt ein Bild mit Transparenz in ein PNG um, dessen Pixel entweder vollständig deckend oder vollständig transparent sind – genau das, was die weiße Tinte beim DTF-Druck (Direct-to-Film) braucht.</p>
+      <p xml:lang="it">Trasforma un'immagine con trasparenza in un PNG i cui pixel sono completamente opachi o completamente trasparenti, ciò che serve all'inchiostro bianco della stampa DTF (direct to film).</p>
+      <p xml:lang="fr">Transforme une image avec transparence en un PNG dont les pixels sont soit totalement opaques, soit totalement transparents, ce dont l'encre blanche de l'impression DTF (direct to film) a besoin.</p>
+      <p xml:lang="pt_BR">Transforma uma imagem com transparência em um PNG cujos pixels são totalmente opacos ou totalmente transparentes, que é o que a tinta branca da impressão DTF (direct to film) precisa.</p>
+      <p xml:lang="ca">Converteix una imatge amb transparència en un PNG els píxels del qual són totalment opacs o totalment transparents, que és el que necessita la tinta blanca de la impressió DTF (direct to film).</p>
+      <p>Remove the shirt color from the image, soften the edges with an inward or outward fade, and turn transparency into a halftone of dots with adjustable line frequency, angle and dot shape. A live preview lets you compare the original and the result on any shirt color.</p>
+      <p xml:lang="es">Quita el color de la camiseta de la imagen, suaviza los bordes con un degradado hacia dentro o hacia fuera y convierte la transparencia en una trama de puntos con lineatura, ángulo y forma de punto ajustables. La vista previa en directo permite comparar el original y el resultado sobre cualquier color de camiseta.</p>
+      <p xml:lang="de">Entfernt die Shirt-Farbe aus dem Bild, weicht die Kanten mit einem Verlauf nach innen oder außen auf und wandelt Transparenz in ein Halbtonraster aus Punkten um – mit einstellbarer Rasterweite, einstellbarem Winkel und einstellbarer Punktform. Eine Live-Vorschau vergleicht Original und Ergebnis auf jeder Shirt-Farbe.</p>
+      <p xml:lang="it">Rimuove il colore della maglietta dall'immagine, ammorbidisce i bordi con una sfumatura verso l'interno o l'esterno e converte la trasparenza in una trama di punti con lineatura, angolo e forma del punto regolabili. L'anteprima in tempo reale permette di confrontare l'originale e il risultato su qualsiasi colore di maglietta.</p>
+      <p xml:lang="fr">Retire la couleur du t-shirt de l'image, adoucit les bords avec un dégradé vers l'intérieur ou l'extérieur et convertit la transparence en une trame de points dont la linéature, l'angle et la forme sont réglables. L'aperçu en direct permet de comparer l'original et le résultat sur n'importe quelle couleur de t-shirt.</p>
+      <p xml:lang="pt_BR">Remove a cor da camiseta da imagem, suaviza as bordas com um degradê para dentro ou para fora e converte a transparência em uma retícula de pontos com lineatura, ângulo e forma do ponto ajustáveis. A visualização em tempo real permite comparar o original e o resultado em qualquer cor de camiseta.</p>
+      <p xml:lang="ca">Treu el color de la samarreta de la imatge, suavitza les vores amb un degradat cap a dins o cap a fora i converteix la transparència en una trama de punts amb lineatura, angle i forma de punt ajustables. La vista prèvia en directe permet comparar l'original i el resultat sobre qualsevol color de samarreta.</p>
   </description>
   <launchable type="desktop-id">com.tiasmile.SemitonosDTF.desktop</launchable>
+  <translation type="gettext">semitonos-dtf</translation>
   <url type="homepage">https://tiasmile.com</url>
+  <url type="bugtracker">https://github.com/ejemplo/semitonos-dtf/issues</url>
+  <url type="vcs-browser">https://github.com/ejemplo/semitonos-dtf</url>
+  <url type="translate">https://github.com/ejemplo/semitonos-dtf/blob/main/TRADUCIR.md</url>
   <categories>
     <category>Graphics</category>
   </categories>
+  <keywords>
+    <keyword>halftone</keyword>
+    <keyword>DTF</keyword>
+    <keyword>print</keyword>
+    <keyword>transparency</keyword>
+    <keyword>shirt</keyword>
+    <keyword>t-shirt</keyword>
+    <keyword>screen</keyword>
+    <keyword>dots</keyword>
+  </keywords>
+  <requires>
+    <display_length compare="ge">1150</display_length>
+  </requires>
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </supports>
+  <branding>
+    <color type="primary" scheme_preference="light">#99c1f1</color>
+    <color type="primary" scheme_preference="dark">#1a5fb4</color>
+  </branding>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/ejemplo/semitonos-dtf/v1.0.0/flatpak/capturas/claro.png</image>
+      <caption>Comparing the original with the halftone result on a black shirt</caption>
+      <caption xml:lang="es">Comparación del original con el resultado en semitono sobre una camiseta negra</caption>
+      <caption xml:lang="de">Vergleich des Originals mit dem Halbton-Ergebnis auf einem schwarzen Shirt</caption>
+      <caption xml:lang="it">Confronto tra l'originale e il risultato a mezzitoni su una maglietta nera</caption>
+      <caption xml:lang="fr">Comparaison de l'original et du résultat en demi-teintes sur un t-shirt noir</caption>
+      <caption xml:lang="pt_BR">Comparação do original com o resultado em meio-tom em uma camiseta preta</caption>
+      <caption xml:lang="ca">Comparació de l'original amb el resultat en semitò sobre una samarreta negra</caption>
+    </screenshot>
+    <screenshot>
+      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/ejemplo/semitonos-dtf/v1.0.0/flatpak/capturas/oscuro.png</image>
+      <caption>Dark mode</caption>
+      <caption xml:lang="es">Modo oscuro</caption>
+      <caption xml:lang="de">Dunkler Modus</caption>
+      <caption xml:lang="it">Tema scuro</caption>
+      <caption xml:lang="fr">Mode sombre</caption>
+      <caption xml:lang="pt_BR">Modo escuro</caption>
+      <caption xml:lang="ca">Mode fosc</caption>
+    </screenshot>
+  </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
-    <release version="1.0.0" date="2026-10-27"/>
+    <release version="1.0.0" date="2026-10-27">
+      <description>
+        <p>First release: halftones for DTF with seven interface languages.</p>
+        <p xml:lang="es">Primera versión: semitonos para DTF con la interfaz en siete idiomas.</p>
+        <p xml:lang="de">Erste Version: Halbtöne für DTF mit der Oberfläche in sieben Sprachen.</p>
+        <p xml:lang="it">Prima versione: mezzitoni per DTF con l'interfaccia in sette lingue.</p>
+        <p xml:lang="fr">Première version : demi-teintes pour DTF avec l'interface en sept langues.</p>
+        <p xml:lang="pt_BR">Primeira versão: meios-tons para DTF com a interface em sete idiomas.</p>
+        <p xml:lang="ca">Primera versió: semitons per a DTF amb la interfície en set idiomes.</p>
+      </description>
+    </release>
   </releases>
 </component>

@@ -5,6 +5,7 @@ hace una captura por idioma en pruebas/salida/idiomas/<idioma>.png.
 Uso:  cd codigo && QT_QPA_PLATFORM=offscreen python3 pruebas/prueba_idiomas.py
 """
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -19,6 +20,9 @@ LOCALE = {"es": "es_ES", "en": "en_US", "de": "de_DE", "it": "it_IT", "fr": "fr_
 
 def comprobar_po():
     fallos = 0
+    if not os.path.isdir(os.path.join(CODIGO, "po")) or not shutil.which("msgfmt"):
+        print("(sin carpeta po/ o sin msgfmt: se omite la comprobación de los .po)")
+        return 0
     for idioma in IDIOMAS[1:]:
         r = subprocess.run(["msgfmt", "--check-format", "--check-header", "--statistics", "-o", os.devnull,
                             os.path.join(CODIGO, "po", idioma + ".po")], capture_output=True, text=True)
@@ -51,7 +55,11 @@ def hijo(idioma):
         comprobar("título traducido", semitonos.APP_NOMBRE != "Semitonos para DTF", f"({semitonos.APP_NOMBRE})")
     app = QApplication([])
     I.instalar_qt(app)
-    os.makedirs(SALIDA, exist_ok=True)
+    global SALIDA
+    try:
+        os.makedirs(SALIDA, exist_ok=True)
+    except OSError:                       # dentro del Flatpak el código es de solo lectura
+        SALIDA = tempfile.mkdtemp()
     ruta = os.path.join(tempfile.mkdtemp(), "ejemplo.png")
     w, h = 600, 450
     x, y = np.linspace(0, 1, w)[None, :].repeat(h, 0), np.linspace(0, 1, h)[:, None].repeat(w, 1)

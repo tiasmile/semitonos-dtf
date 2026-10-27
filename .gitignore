@@ -4,3 +4,5 @@ Portable/
 __pycache__/
 salida/
 .venv/
+flatpak/flathub/paquete/
+flatpak/capturas/__pycache__/
