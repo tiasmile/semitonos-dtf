@@ -33,9 +33,6 @@
   <launchable type="desktop-id">com.tiasmile.SemitonosDTF.desktop</launchable>
   <translation type="gettext">semitonos-dtf</translation>
   <url type="homepage">https://tiasmile.com</url>
-  <url type="bugtracker">https://github.com/ejemplo/semitonos-dtf/issues</url>
-  <url type="vcs-browser">https://github.com/ejemplo/semitonos-dtf</url>
-  <url type="translate">https://github.com/ejemplo/semitonos-dtf/blob/main/TRADUCIR.md</url>
   <categories>
     <category>Graphics</category>
   </categories>
@@ -60,28 +57,6 @@
     <color type="primary" scheme_preference="light">#99c1f1</color>
     <color type="primary" scheme_preference="dark">#1a5fb4</color>
   </branding>
-  <screenshots>
-    <screenshot type="default">
-      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/ejemplo/semitonos-dtf/v1.0.0/flatpak/capturas/claro.png</image>
-      <caption>Comparing the original with the halftone result on a black shirt</caption>
-      <caption xml:lang="es">Comparación del original con el resultado en semitono sobre una camiseta negra</caption>
-      <caption xml:lang="de">Vergleich des Originals mit dem Halbton-Ergebnis auf einem schwarzen Shirt</caption>
-      <caption xml:lang="it">Confronto tra l'originale e il risultato a mezzitoni su una maglietta nera</caption>
-      <caption xml:lang="fr">Comparaison de l'original et du résultat en demi-teintes sur un t-shirt noir</caption>
-      <caption xml:lang="pt_BR">Comparação do original com o resultado em meio-tom em uma camiseta preta</caption>
-      <caption xml:lang="ca">Comparació de l'original amb el resultat en semitò sobre una samarreta negra</caption>
-    </screenshot>
-    <screenshot>
-      <image type="source" width="1600" height="900">https://raw.githubusercontent.com/ejemplo/semitonos-dtf/v1.0.0/flatpak/capturas/oscuro.png</image>
-      <caption>Dark mode</caption>
-      <caption xml:lang="es">Modo oscuro</caption>
-      <caption xml:lang="de">Dunkler Modus</caption>
-      <caption xml:lang="it">Tema scuro</caption>
-      <caption xml:lang="fr">Mode sombre</caption>
-      <caption xml:lang="pt_BR">Modo escuro</caption>
-      <caption xml:lang="ca">Mode fosc</caption>
-    </screenshot>
-  </screenshots>
   <content_rating type="oars-1.1"/>
   <releases>
     <release version="1.0.0" date="2026-10-27">
