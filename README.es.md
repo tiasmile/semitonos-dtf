@@ -8,6 +8,8 @@ una trama de puntos, con vista previa en directo del antes y el después sobre c
 
 ![Semitonos DTF](flatpak/capturas/claro.png)
 
+> **Plataforma: solo Linux.** Se distribuye como Flatpak (funciona en cualquier distribución de Linux con Flatpak), para ordenadores Intel/AMD de 64 bits (x86_64). No hay versión para Windows ni macOS. Necesita una ventana de al menos 1150 × 720 px.
+
 ## Qué hace
 - Quita el color de la camiseta (con cuentagotas) para que se imprima como transparencia.
 - Degradado del borde: hacia dentro o hacia fuera, siguiendo el diseño, ovalado o redondo.

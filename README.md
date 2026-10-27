@@ -8,6 +8,8 @@ with a live before/after preview on any shirt color.
 
 ![Semitonos DTF](flatpak/capturas/claro.png)
 
+> **Platform: Linux only.** Distributed as a Flatpak (works on any Linux distribution with Flatpak), for 64-bit Intel/AMD computers (x86_64). There is no Windows or macOS version. It needs a window of at least 1150 × 720 px.
+
 ## Features
 - Remove the shirt color (with eyedropper) so it prints as transparency.
 - Edge fade: inward or outward, following the design, oval or round.
