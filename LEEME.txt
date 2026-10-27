@@ -7,27 +7,19 @@ Este programa se usa instalado como Flatpak (aparece en el menú de aplicaciones
    Ajustes:      ~/.var/app/com.tiasmile.SemitonosDTF/config/
    Licencia:     AGPL-3.0 (archivo LICENSE)
    flatpak/      manifiesto y metadatos del paquete (los genera ../flatpak/generar-flatpak.py)
-   Portable/     ejecutable antiguo (plan B); codigo/crear_acceso_directo.sh y compilar_linux.sh ya no se usan.
 
 SEMITONOS PARA DTF  (versión Linux / Bazzite)
 =============================================
 
-Portable/   -> el ejecutable, solo eso (un archivo, no necesita instalar nada)
-   Semitonos DTF
 codigo/     -> código fuente y utilidades
    semitonos.py  ventana y vista previa (PySide6)     tramado.py  cálculo (numpy)     estilo.py  tema
-   compilar_linux.sh            vuelve a generar el ejecutable en Portable/
-   crear_acceso_directo.sh     añade el programa al menú de aplicaciones de este ordenador (opcional)
-   eliminar_acceso_directo.sh  lo quita del menú
-   recursos/                   icono (icono.png) y archivos que van dentro del ejecutable
+   recursos/                   icono (icono.png) y archivos que se instalan con el programa
    pruebas/                    prueba_sin_pantalla.py (compara con la versión Windows)
 
-Dónde guarda cosas (nada junto al ejecutable)
-   Ajustes:  ~/.config/semitonos-dtf/ajustes.json  (se crea solo; bórralo para volver a los valores de fábrica)
+Dónde guarda cosas (nada junto al programa)
+   Ajustes:  ~/.var/app/com.tiasmile.SemitonosDTF/config/semitonos-dtf/ajustes.json  (se crea solo; bórralo para volver a los valores de fábrica)
 
 
-Ejecutar desde el código:  cd codigo && .venv/bin/python semitonos.py [imagen.png]
-Si no existe .venv:        ./compilar_linux.sh lo crea (e instala lo necesario)
 
 Qué hace
   Prepara una imagen para estampar en DTF. Lo que se trama es la TRANSPARENCIA: el PNG final
