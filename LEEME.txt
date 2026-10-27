@@ -1,0 +1,70 @@
+INSTALACIÓN (Flatpak)  ·  com.tiasmile.SemitonosDTF
+============================================================
+Este programa se usa instalado como Flatpak (aparece en el menú de aplicaciones).
+   Abrir:        flatpak run com.tiasmile.SemitonosDTF
+   Actualizar:   tras cambiar el código, ejecuta  ../flatpak/construir.sh "Semitonos DTF"
+   Desinstalar:  flatpak uninstall --user com.tiasmile.SemitonosDTF
+   Ajustes:      ~/.var/app/com.tiasmile.SemitonosDTF/config/
+   Licencia:     AGPL-3.0 (archivo LICENSE)
+   flatpak/      manifiesto y metadatos del paquete (los genera ../flatpak/generar-flatpak.py)
+   Portable/     ejecutable antiguo (plan B); codigo/crear_acceso_directo.sh y compilar_linux.sh ya no se usan.
+
+SEMITONOS PARA DTF  (versión Linux / Bazzite)
+=============================================
+
+Portable/   -> el ejecutable, solo eso (un archivo, no necesita instalar nada)
+   Semitonos DTF
+codigo/     -> código fuente y utilidades
+   semitonos.py  ventana y vista previa (PySide6)     tramado.py  cálculo (numpy)     estilo.py  tema
+   compilar_linux.sh            vuelve a generar el ejecutable en Portable/
+   crear_acceso_directo.sh     añade el programa al menú de aplicaciones de este ordenador (opcional)
+   eliminar_acceso_directo.sh  lo quita del menú
+   recursos/                   icono (icono.png) y archivos que van dentro del ejecutable
+   pruebas/                    prueba_sin_pantalla.py (compara con la versión Windows)
+
+Dónde guarda cosas (nada junto al ejecutable)
+   Ajustes:  ~/.config/semitonos-dtf/ajustes.json  (se crea solo; bórralo para volver a los valores de fábrica)
+
+
+Ejecutar desde el código:  cd codigo && .venv/bin/python semitonos.py [imagen.png]
+Si no existe .venv:        ./compilar_linux.sh lo crea (e instala lo necesario)
+
+Qué hace
+  Prepara una imagen para estampar en DTF. Lo que se trama es la TRANSPARENCIA: el PNG final
+  solo tiene píxeles totalmente opacos o totalmente transparentes (lo que necesita la tinta
+  blanca), y cada punto conserva su color.
+
+Cómo se usa
+  1. Arrastra la imagen a la ventana (o «Abrir imagen…»): PNG, JPG, TIFF, WEBP, BMP o GIF.
+  2. Tamaño de impresión: ancho o alto en cm (van unidos) y resolución (300 ppp normalmente).
+     Al abrir la imagen se propone su tamaño real (a sus ppp si tiene 150 o más; si no, a 300).
+     Si la imagen original se queda por debajo de 150 ppp a ese tamaño, avisa.
+  3. Color de la camiseta: blanca, negra, gris, azul marino, roja, verde botella, «Otro…» o
+     «Cuentagotas» (clic en la vista sobre el color que quieras quitar; Esc cancela).
+     «Quitar el color de la camiseta»: lo que se parece a ese color desaparece y los tonos
+     intermedios se convierten en puntos.
+       Quitar hasta (8 %): cuánto se puede parecer un color a la camiseta para desaparecer del todo.
+       Opaco desde (60 %): a partir de cuánta diferencia el color queda sólido, sin puntos.
+  4. Degradado del borde (del 100 % al 0 % de opacidad, con puntos):
+       Hacia dentro: difumina el borde del diseño (o de la foto) hacia dentro.
+       Hacia fuera: añade un margen nuevo alrededor alargando los colores del borde.
+                    La imagen crece ese ancho por cada lado.
+     Forma del degradado: «Sigue el diseño», «Ovalado» o «Redondo» (elipse o círculo, sin esquinas).
+  5. Semitono: lineatura en lpi (20 por defecto = trama de 1,27 mm; más baja = puntos más grandes),
+     ángulo (45°), forma del punto (redondo, euclídeo, cuadrado o líneas), punto mínimo (los puntos
+     más pequeños se quitan, porque no agarran) y máximo (por encima, relleno sólido).
+     Desmarcando «Convertir la transparencia en puntos» se guarda la transparencia suave.
+  6. «Guardar PNG para DTF»: se guarda junto a la original como «<nombre> - DTF semitono.png»,
+     a la resolución elegida. Nunca sobrescribe: si ya existe, añade (2), (3)...
+
+Vista previa
+  Se ve sobre el color que elijas en «Fondo de la vista»: Blanco, Negro o Color elegido (el de la
+  camiseta). Es solo para ver: el PNG que se guarda no lleva fondo. Útil para distinguir qué parte es del
+  dibujo y qué parte es el color de la camiseta que se está quitando. «Comparar» (por defecto): el original a la izquierda de la
+  barra amarilla y el resultado a la derecha; arrastra la barra con el botón izquierdo.
+  «Resultado» u «Original»: solo uno, a toda la vista.
+  «Ajustar» / «100 %» / «200 %», o la rueda del ratón para acercar o alejar (hacia donde apunta).
+  Botón derecho: mover la imagen (en «Resultado» y «Original» también con el izquierdo).
+  Doble clic: volver a ver la imagen entera.
+  La vista se recalcula sola a los pocos segundos de cambiar cualquier ajuste; mover la barra no
+  recalcula nada.

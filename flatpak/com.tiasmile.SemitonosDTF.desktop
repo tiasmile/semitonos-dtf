@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Semitonos DTF
+Comment=Prepara imágenes para estampar en DTF con semitonos
+Exec=semitonos-dtf %f
+Icon=com.tiasmile.SemitonosDTF
+Terminal=false
+Categories=Graphics;
+MimeType=image/png;image/jpeg;image/webp;image/tiff;

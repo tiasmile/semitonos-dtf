@@ -1,0 +1,5 @@
+.build-flatpak/
+salida/
+__pycache__/
+.venv/
+Portable/

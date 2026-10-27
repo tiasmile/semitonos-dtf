@@ -1,0 +1,48 @@
+app-id: com.tiasmile.SemitonosDTF
+runtime: org.kde.Platform
+runtime-version: '6.10'
+sdk: org.kde.Sdk
+base: io.qt.PySide.BaseApp
+base-version: '6.10'
+command: semitonos-dtf
+build-options:
+  env:
+    BASEAPP_REMOVE_WEBENGINE: '1'
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
+  # solo sirven para generar enlaces de PySide, no para ejecutar programas
+  - rm -rf /app/lib/libLLVM* /app/lib/libclang* /app/lib/python3.13/site-packages/shiboken6_generator /app/include /app/mkspecs
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  - --device=dri
+modules:
+  - python3-deps.json
+  - name: semitonos-dtf
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 semitonos-dtf.sh /app/bin/semitonos-dtf
+      - install -dm755 /app/share/semitonos-dtf
+      - cp -r codigo/*.py codigo/recursos codigo/pruebas /app/share/semitonos-dtf/
+      - install -Dm644 com.tiasmile.SemitonosDTF.desktop /app/share/applications/com.tiasmile.SemitonosDTF.desktop
+      - install -Dm644 com.tiasmile.SemitonosDTF.metainfo.xml /app/share/metainfo/com.tiasmile.SemitonosDTF.metainfo.xml
+      - install -Dm644 codigo/recursos/icono.png /app/share/icons/hicolor/256x256/apps/com.tiasmile.SemitonosDTF.png
+      - install -Dm644 LICENSE /app/share/licenses/com.tiasmile.SemitonosDTF/LICENSE
+    sources:
+      - type: dir
+        path: ..
+        skip:
+          - flatpak
+          - Portable
+          - .venv
+          - .build
+          - .git
+          - __pycache__
+          - salida
+      - type: file
+        path: semitonos-dtf.sh
+      - type: file
+        path: com.tiasmile.SemitonosDTF.desktop
+      - type: file
+        path: com.tiasmile.SemitonosDTF.metainfo.xml
