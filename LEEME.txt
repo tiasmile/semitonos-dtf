@@ -6,6 +6,10 @@ Este programa se usa instalado como Flatpak (aparece en el menú de aplicaciones
    Desinstalar:  flatpak uninstall --user com.tiasmile.SemitonosDTF
    Ajustes:      ~/.var/app/com.tiasmile.SemitonosDTF/config/
    Licencia:     AGPL-3.0 (archivo LICENSE)
+   Idiomas:      castellano, inglés, alemán, italiano, francés, portugués de Brasil y catalán (sigue el del sistema;
+                 probar otro:  LANGUAGE=en flatpak run com.tiasmile.SemitonosDTF). Traducciones: codigo/po/ (ver TRADUCIR.md)
+   Pruebas:      ../flatpak/probar.sh "Semitonos DTF"   (suite normal + prueba de idiomas, dentro del Flatpak)
+   Publicar:     PUBLICAR.md (guía paso a paso; LÉELA: la política de IA de Flathub afecta a este proyecto)
    flatpak/      manifiesto y metadatos del paquete (los genera ../flatpak/generar-flatpak.py)
 
 SEMITONOS PARA DTF  (versión Linux / Bazzite)
